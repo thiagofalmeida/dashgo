@@ -1,15 +1,21 @@
-import { Flex, HStack, Icon, Box, Text, Avatar } from "@chakra-ui/react";
-import { RiNotificationLine, RiUserAddLine } from "react-icons/ri";
+import { Flex, Box, Text, Avatar } from "@chakra-ui/react";
 
-export function Profile() {
+interface ProfilerProps {
+  showProfileData?: boolean
+}
+
+export function Profile({ showProfileData }: ProfilerProps) {
   return (
     <Flex align="center">
-      <Box mr="4" textAlign="right">
-        <Text>Thiago Almeida</Text>
-        <Text color="gray.300" fontSize="small">
-          thiagofalmd@gmail.com
-        </Text>
-      </Box>
+      { showProfileData && (
+        <Box mr="4" textAlign="right">
+          <Text>Thiago Almeida</Text>
+          <Text color="gray.300" fontSize="small">
+            thiagofalmd@gmail.com
+          </Text>
+        </Box>
+      )}
+     
       <Avatar
         size="md" 
         name="Thiago Almeida" 

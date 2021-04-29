@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
-import { Siderbar } from "../../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 export default function CreateUser() {
   return (
@@ -19,7 +19,7 @@ export default function CreateUser() {
       <Header />
 
       <Flex w="100%" maxW={1480} my="6" mx="auto" px="6">
-        <Siderbar />
+        <Sidebar />
 
         <Box flex="1" borderRadius={8} bg="gray.800" p="8">
           <Heading size="lg" fontWeight="normal">Criar Usuário</Heading>
