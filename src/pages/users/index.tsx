@@ -11,9 +11,11 @@ import {
   Checkbox, 
   Tbody,
   Td,
-  Link,
-  Text
+  Link as ChakraLink,
+  Text,
+  useBreakpointValue
 } from "@chakra-ui/react";
+import Link from 'next/link';
 import { Spinner } from "@chakra-ui/spinner";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
@@ -21,6 +23,11 @@ import { Pagination } from "../../components/Pagination";
 import Sidebar from "../../components/Sidebar";
 
 export default function UserList() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true
+  })
+
   return (
     <Box>
       <Header />
@@ -35,15 +42,17 @@ export default function UserList() {
               <Spinner size="sm" color="gray.500" ml="4" />
             </Heading>
 
-            <Button 
-                as="a" 
-                size="sm" 
-                fontSize="sm" 
-                colorScheme="pink"
-                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-              >
-                Criar novo
-            </Button>
+            <Link href="/users/create" passHref>
+              <Button 
+                  as="a" 
+                  size="sm" 
+                  fontSize="sm" 
+                  colorScheme="pink"
+                  leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+                >
+                  Criar novo
+              </Button>
+            </Link>
           </Flex>
 
           <Table colorScheme="whiteAlpha">
@@ -53,7 +62,7 @@ export default function UserList() {
                   <Checkbox colorScheme="pink" />
                 </Th>
                 <Th>Usuário</Th>
-                <Th>Data de criação</Th>
+                {isWideVersion && <Th>Data de cadastro</Th>}
                 <Th></Th>
               </Tr>
             </Thead>
@@ -64,13 +73,13 @@ export default function UserList() {
                 </Td>
                 <Td>
                   <Box>
-                    <Link color="purple.400">
+                    <ChakraLink color="purple.400">
                       <Text fontWeight="bold">Thiago Almeida</Text>
-                    </Link>
+                    </ChakraLink>
                     <Text fontSize="sm" color="gray.300">email@email.com</Text>
                   </Box>
                 </Td>
-                <Td>123</Td>
+                {isWideVersion && <Td>12 de Abril de 2021</Td>}
                 <Td>
                   <Button 
                     as="a" 
