@@ -1,7 +1,8 @@
-import { Spinner, Box, Button, Flex, Heading, Icon, Table, Th, Thead, Tr, Checkbox, Tbody, Td, Link as ChakraLink, Text, useBreakpointValue } from "@chakra-ui/react"
-
+import { useState } from "react"
 import Link from 'next/link'
 import { RiAddLine, RiPencilLine } from "react-icons/ri"
+
+import { Spinner, Box, Button, Flex, Heading, Icon, Table, Th, Thead, Tr, Checkbox, Tbody, Td, Link as ChakraLink, Text, useBreakpointValue } from "@chakra-ui/react"
 
 import { Header } from "../../components/Header"
 import { Pagination } from "../../components/Pagination"
@@ -10,14 +11,13 @@ import Sidebar from "../../components/Sidebar"
 import { useUsers } from "../../services/hooks/useUsers"
 
 export default function UserList() {
-  const { data, isLoading, isFetching, error } = useUsers()
+  const [page, setPage] = useState(1)
+  const { data, isLoading, isFetching, error } = useUsers(page)
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true
   })
-
-  console.log(data)
 
   return (
     <Box>
@@ -99,7 +99,11 @@ export default function UserList() {
                 </Tbody>
               </Table>
 
-              <Pagination />
+              <Pagination 
+                totalCountOfRegisters={data.totalCount}
+                currentPage={page}
+                onPageChange={setPage}
+              />
             </>
           )}
         </Box>
